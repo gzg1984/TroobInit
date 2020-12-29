@@ -1,0 +1,9 @@
+target
+dependency-reduced-pom.xml
+
+
+# Create By Vscode to manage java code, not essential
+.classpath
+.project
+.settings/
+.vscode/
