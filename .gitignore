@@ -7,3 +7,5 @@ dependency-reduced-pom.xml
 .project
 .settings/
 .vscode/
+
+temp.log
