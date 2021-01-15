@@ -16,7 +16,7 @@ import org.apache.lucene.analysis.miscellaneous.LengthFilter;
 
 public class SourceFileAnalyzer extends Analyzer {
 
-	private Set stops;//用于存放分词信息
+	private Set stops;// save word info
 	private final String[] JAVA_SYNTAX={"abstract",
 			"boolean","break","byte",
 			"case","catch","char","class","continue",
@@ -33,19 +33,19 @@ public class SourceFileAnalyzer extends Analyzer {
 			"while"};
 	
     public SourceFileAnalyzer(String languageType) {
-//        stops = StopAnalyzer.ENGLISH_STOP_WORDS_SET;//默认停用的语汇信息
+//        stops = StopAnalyzer.ENGLISH_STOP_WORDS_SET;// default stop
         if("JAVA".equals(languageType)){
         	 stops = StopFilter.makeStopSet( JAVA_SYNTAX, false);
         }
     }
     public SourceFileAnalyzer() {
-//      stops = StopAnalyzer.ENGLISH_STOP_WORDS_SET;//默认停用的语汇信息
+//      stops = StopAnalyzer.ENGLISH_STOP_WORDS_SET;// default stop
      
   }
-    //这里可以将通过数组产生分词对象
+    // generate word obj
     public SourceFileAnalyzer(String[] sws) {
         //System.out.println(StopAnalyzer.ENGLISH_STOP_WORDS_SET);
-        stops = StopFilter.makeStopSet( sws, true);//最后的参数表示忽略大小写
+        stops = StopFilter.makeStopSet( sws, true);// true means ignore capital
 //        stops.addAll(StopAnalyzer.ENGLISH_STOP_WORDS_SET);
     }
 

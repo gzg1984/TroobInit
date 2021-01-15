@@ -82,6 +82,6 @@ cd $OLDPWD
 rm -rf $projectFolder/index
 java -jar target/index-0.0.3-SNAPSHOT.jar -r $projectFolder -p $projectName
 cp -rf $projectFolder/$projectName $TARGETPROJECTROOT/
-cp -rf $projectFolder/index $TARGETINDEXROOT/$projectName
+cp -rf $projectFolder/Index $TARGETINDEXROOT/$projectName
 # cd /Library/tomcat/bin
 # sudo ./startup.sh

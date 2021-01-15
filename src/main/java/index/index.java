@@ -135,7 +135,7 @@ public class index {
             for (File f : fileList) {
                 // System.out.printf("%s\n", f.getAbsolutePath());
                 if (isBinary(f)) {
-                    System.out.println("文件" + f.getAbsolutePath() + "不是源代码文件，skip");
+                    System.out.println("file " + f.getAbsolutePath() + " is not txt source, skip");
                     continue;
                 }
                 Document document = new Document();
@@ -150,7 +150,7 @@ public class index {
                     indexWriter.addDocument(document);
                 } catch (Exception ex) {
                     ex.printStackTrace(); //
-                    System.out.println("無法創建索引:" + f.getAbsolutePath());
+                    System.out.println("Cannot create index:" + f.getAbsolutePath());
                     continue;
                 }
             }
@@ -188,7 +188,7 @@ public class index {
                         if (file2.isDirectory()) {
 
                             /*
-                             * 2020 11 03 这里是用来新增文件的？
+                             * 2020 11 03 to create new file?
                              * 
                              * ProjectFilePO filePo = new ProjectFilePO(parentFileId,relativePath,
                              * FileType.DIRECTORY, null, projectId, file2.getName());
@@ -196,18 +196,19 @@ public class index {
                              */
                             // projectServiceImpl.addProjectFile(filePo);
 
-                            // System.out.println("文件夹:" +
+                            // System.out.println("folder:" +
                             // file2.getAbsolutePath());
                             // LinkedList<File> fileList=
                             // getAllFileRecuision(file2.getAbsolutePath(),projectId,filePo.getFileId());
                             /*
-                             * 2020 11 03 递归调用本函数自己 LinkedList<File> fileList =
+                             * 2020 11 03 rec call myself
+                             * LinkedList<File> fileList =
                              * getAllFileRecuision(file2.getAbsolutePath(), projectId, filePo.getUuid(),
                              * poList); if (null != fileList) { list.addAll(fileList); }
                              */
 
                         } else {
-                            // System.out.println("文件:" +
+                            // System.out.println("file :" +
                             // file2.getAbsolutePath());
 
                             list.add(file2);
@@ -215,7 +216,8 @@ public class index {
                             // parentFileId++;
 
                             /*
-                             * 2020 11 03 这里是用来新增文件的？ projectWithBLOBs filePo = new
+                             * 2020 11 03 to create new file
+                             *  projectWithBLOBs filePo = new
                              * projectWithBLOBs(parentFileId, relativePath, FileType.FILE,
                              * String.valueOf(file2.length()), projectId, file2.getName());
                              * filePo.setUuid(UUID.randomUUID().toString()); poList.add(filePo);
@@ -230,7 +232,7 @@ public class index {
                 return list;
             }
         } else {
-            System.out.println("文件不存在!");
+            System.out.println("file not exist!");
             return null;
         }
     }

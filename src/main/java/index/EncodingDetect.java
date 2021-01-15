@@ -11,26 +11,8 @@ import java.io.InputStreamReader;
 import java.net.URL;
 
 /**
- * @author 郑明亮
- * @Time：2016年10月28日 下午5:58:24
- * @version 1.0
  */
 /**
- * <Detect encoding .>
- *  Copyright (C) <2009>  <Fluck,ACC http://androidos.cc/dev>
- *
- *   This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * EncodingDetect.java<br>
- * 自动获取文件的编码
  * @author Billows.Van
  * @since Create on 2010-01-27 11:19:00   
  * @version 1.0 
@@ -44,9 +26,9 @@ public class EncodingDetect {
 	}
 	
 	/**
-	 * 得到文件的编码
-	 * @param filePath 文件路径
-	 * @return 文件的编码
+	 * get code of file
+	 * @param filePath path of file
+	 * @return code of file
 	 */
 	public static String getJavaEncode(String filePath){
 		BytesEncodingDetect s = new BytesEncodingDetect(); 
@@ -69,13 +51,13 @@ public class EncodingDetect {
 			fr = new BufferedReader(read);
 			String line = null;
 			int flag=1;
-			// 读取每一行，如果结束了，line会为空
+			// read every line to empty
 			while ((line = fr.readLine()) != null && line.trim().length() > 0) {
 				if(flag==1) {
-				    line=line.substring(1);//去掉文件头
+				    line=line.substring(1);//cut head
 				    flag++;
 			    }
-				// 每一行创建一个Student对象，并存入数组中
+				// output every line
 				System.out.println(line);
 			}
 			fr.close();

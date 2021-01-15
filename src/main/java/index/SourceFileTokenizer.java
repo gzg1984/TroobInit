@@ -69,7 +69,7 @@ public class SourceFileTokenizer extends Tokenizer {
 				hasMultilineComment=true;
 				assert length>0;
 				
-				//多行注释开始
+				// start of multi-comments
 //				if(length>= buffer.length - 1){
 //					buffer = termAtt.resizeBuffer(2 + length);
 //				}
@@ -79,7 +79,7 @@ public class SourceFileTokenizer extends Tokenizer {
 				hasSinglelineComment=true;
 			}
 
-			if(!hasSinglelineComment&&!hasMultilineComment&&c==34&&lastChar!=92&&!hasString){ // ""双引号字符串
+			if(!hasSinglelineComment&&!hasMultilineComment&&c==34&&lastChar!=92&&!hasString){ // "" double " " string
 				hasString=true;
 				lastChar=c;
 				skippedPositions++;

@@ -16,7 +16,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.3.2</version>
+				<version>1.6.0</version>
 				<executions>
 					<execution>
 						<id>ex</id>
@@ -25,7 +25,8 @@
 							<goal>exec</goal>
 						</goals>
 						<configuration>
-							<executable>java</executable>
+							<executable>java</executable> <!-- should
+							 be the java program of specified java-->
 							<arguments>
 								<argument>-classpath</argument>
 								<classpath />
