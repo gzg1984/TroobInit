@@ -42,6 +42,7 @@ import org.apache.lucene.document.Field;
 public class index {
     static boolean verbose = false;
     static String fileRoot = "/opt/file_root/index_base/";
+    static int rootLength=0;
     static String projectName = "test";
     static String projectPath = fileRoot + projectName;
     static String field = "content";
@@ -73,9 +74,16 @@ public class index {
             if (commandLine.hasOption('p')) {
                 projectName = commandLine.getOptionValue('p');
                 projectPath = fileRoot + projectName;
+                //projectPath =   projectName;
             }
 
             indexPath = fileRoot + "Index";
+            //indexPath =  "Index";
+            File fRoot=new File(fileRoot);
+            String rootAbsolute=fRoot.getAbsolutePath();
+            System.out.println("Root Absolute Path :  " + rootAbsolute);
+
+            rootLength=rootAbsolute.length();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -124,6 +132,7 @@ public class index {
                 return;
             }
             if (fileList.size() == 0) {
+                System.out.println("Find No file in " + projectPath);
                 return;
             }
 
@@ -143,10 +152,10 @@ public class index {
                 try {
                     String fileEncoding = EncodingDetect.getJavaEncode(f);
                     sourceContent = FileUtils.readFileToString(f, fileEncoding);
-                    document.add(new Field("content",sourceContent, TextField.TYPE_STORED));
+                    document.add(new Field("content", sourceContent, TextField.TYPE_STORED));
                     document.add(new Field("fileName", f.getName(), TextField.TYPE_STORED));
-                    document.add(new Field("filePath", f.getAbsolutePath() , TextField.TYPE_STORED));
-                    //document.add(new Field("projectId",projectId,TextField.TYPE_STORED)); 
+                    document.add(new Field("filePath", f.getAbsolutePath().substring(rootLength), TextField.TYPE_STORED));
+                    // document.add(new Field("projectId",projectId,TextField.TYPE_STORED));
                     indexWriter.addDocument(document);
                 } catch (Exception ex) {
                     ex.printStackTrace(); //
@@ -186,44 +195,12 @@ public class index {
                 for (File file2 : files) {
                     try {
                         if (file2.isDirectory()) {
-
-                            /*
-                             * 2020 11 03 to create new file?
-                             * 
-                             * ProjectFilePO filePo = new ProjectFilePO(parentFileId,relativePath,
-                             * FileType.DIRECTORY, null, projectId, file2.getName());
-                             * filePo.setUuid(UUID.randomUUID().toString()); poList.add(filePo);
-                             */
-                            // projectServiceImpl.addProjectFile(filePo);
-
-                            // System.out.println("folder:" +
-                            // file2.getAbsolutePath());
-                            // LinkedList<File> fileList=
-                            // getAllFileRecuision(file2.getAbsolutePath(),projectId,filePo.getFileId());
-                            /*
-                             * 2020 11 03 rec call myself
-                             * LinkedList<File> fileList =
-                             * getAllFileRecuision(file2.getAbsolutePath(), projectId, filePo.getUuid(),
-                             * poList); if (null != fileList) { list.addAll(fileList); }
-                             */
-
+                            LinkedList<File> fileList = getAllFileRecuision(file2.getAbsolutePath());
+                            if (null != fileList) {
+                                list.addAll(fileList);
+                            }
                         } else {
-                            // System.out.println("file :" +
-                            // file2.getAbsolutePath());
-
                             list.add(file2);
-
-                            // parentFileId++;
-
-                            /*
-                             * 2020 11 03 to create new file
-                             *  projectWithBLOBs filePo = new
-                             * projectWithBLOBs(parentFileId, relativePath, FileType.FILE,
-                             * String.valueOf(file2.length()), projectId, file2.getName());
-                             * filePo.setUuid(UUID.randomUUID().toString()); poList.add(filePo);
-                             */
-
-                            // projectServiceImpl.addProjectFile(filePo);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
