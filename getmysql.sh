@@ -2,7 +2,7 @@
 mysqlCount=`which mysql|wc -l`
 if [ $mysqlCount -eq 1 ]
 then
-    echo "mysql -h 127.0.0.1 -u root -Proot "
+    echo "mysql -h 127.0.0.1 -u root -proot "
     exit 0
 fi
 

@@ -39,6 +39,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.lucene.document.TextField;
 import org.apache.lucene.document.Field;
 
+
 public class index {
     static boolean verbose = false;
     static String fileRoot = "/opt/file_root/index_base/";
@@ -195,10 +196,14 @@ public class index {
                 for (File file2 : files) {
                     try {
                         if (file2.isDirectory()) {
-                            LinkedList<File> fileList = getAllFileRecuision(file2.getAbsolutePath());
-                            if (null != fileList) {
-                                list.addAll(fileList);
+                            //System.out.printf("Try to Recuision list %s\n", file2.getName());
+                            if (!file2.getName().equals(".git")){
+                                LinkedList<File> fileList = getAllFileRecuision(file2.getAbsolutePath());
+                                if (null != fileList) {
+                                    list.addAll(fileList);
+                                }
                             }
+
                         } else {
                             list.add(file2);
                         }
