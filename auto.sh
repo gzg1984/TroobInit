@@ -1,5 +1,5 @@
 #!/bin/sh
-. projectFile.sh
+. ./projectFile.sh
 
 #update lxr_db.tb_project_file set file_path='/test/curl.sh' where uuid='testuuid' ;
 TARGETROOT=/opt

@@ -11,6 +11,10 @@ java -jar target/index-0.0.3-SNAPSHOT.jar -r /Users/gaozhigang/Downloads -p test
 java -jar target/index-0.0.3-SNAPSHOT.jar -r /home/zhiganggao -p test
 # 会分析/home/zhiganggao/test
 # 索引会产生在 /home/zhiganggao/Index
+
+# ubuntu14 测试命令
+java -jar target/index-0.0.3-SNAPSHOT.jar -r /root/IndexTest -p testSourceFolder
+
 ```
 
 
