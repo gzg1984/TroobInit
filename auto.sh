@@ -1,4 +1,9 @@
 #!/bin/sh
+
+# 用法
+# sudo ./auto.sh /Users/gaozhigang/Downloads/cnlxr_test1
+# 参数是全路径
+# 结果：
 . ./projectFile.sh
 
 #update lxr_db.tb_project_file set file_path='/test/curl.sh' where uuid='testuuid' ;
@@ -31,12 +36,11 @@ projectName=$(basename $PROJECT)
 projectFolder=$(dirname $PROJECT)
 #echo $projectFolder
 
-echo "Copying Source Folder..."
-cd $projectFolder
-rm -rf $TARGETPROJECTROOT/$projectName
-cp -rf $projectName $TARGETPROJECTROOT/
+echo "Copying Source Folder... "$projectFolder/$projectName" to "$TARGETPROJECTROOT/$projectName
+copyProject $TARGETPROJECTROOT $projectFolder $projectName
 
-
+ 
+# Step 1： 将工程相关信息插入到数据库中
 # cd /Library/tomcat/bin
 # sudo ./shutdown.sh
 $MYSQLENTRY  <<!
@@ -61,13 +65,15 @@ OLDPWD=`pwd`
 cd $projectFolder/$projectName
 
 
-
+# Step 2： 将所有文件的信息插入到 tb_project_file 表中
 recEchoMysqlCommandForFolder $PROJECT  >/tmp/tempInsert.log
 
 
 $MYSQLENTRY < /tmp/tempInsert.log
 #echo $OLDPWD
 
+
+# Step 3： 通过本工程下的jar可执行程序，创建索引目录
 echo "Creating Index Folder..."
 rm -rf $projectFolder/Index
 cd $SHELLPWD
@@ -76,7 +82,7 @@ java -jar target/index-0.0.3-SNAPSHOT.jar -r $TARGETPROJECTROOT -p $projectName
 #/opt/jdk1.8.0_161/bin/java -jar target/index-0.0.3-SNAPSHOT.jar -r /opt/files/project_base -p TroobInit
 
 
-
+# Step 4： 把索引目录拷贝到目标目录下
 echo "Copying Index Folder..."
 cd $projectFolder
 rm -rf $TARGETINDEXROOT/$projectName

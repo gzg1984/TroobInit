@@ -43,3 +43,16 @@ recEchoMysqlCommandForFolder(){
 
     done
 }
+
+# $1 Project Target Path
+# $2 Original path
+# $3 Project Name
+copyProject(){
+    if [ $1 != $2 ]
+    then
+        rm -rf $1/$3
+        cp -rf $2/$3 $1/
+    else
+        echo "No Need To Copy"
+    fi
+}
